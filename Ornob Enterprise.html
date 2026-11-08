@@ -1,0 +1,911 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Ornob Enterprise</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@500;700;800&family=Hind+Siliguri:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style id="sitecss">
+/* Layout: black-and-white trade counter. Black hero with the MRO badge, product tiles that show their size as the picture until a photo is added, cart sheet that ends in a WhatsApp message. */
+:root {
+  --bg: #F4F4F2;
+  --surface: #FFFFFF;
+  --field: #FFFFFF;
+  --ink: #0B0B0B;
+  --muted: #565654;
+  --line: #D8D8D4;
+  --line-strong: #8A8A86;
+  --accent: #0B0B0B;
+  --accent-ink: #FFFFFF;
+  --tile: #E9E9E6;
+  --tile-ink: #B4B4AF;
+  --hero: #0B0B0B;
+  --hero-ink: #F4F4F2;
+  --hero-muted: #B1B1AC;
+  --focus: #0B5C8A;
+  --danger: #B3261E;
+  --display: "Anek Bangla", "Hind Siliguri", system-ui, sans-serif;
+  --body: "Hind Siliguri", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --logo: url("data:image/jpeg;base64,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");
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #101010; --surface: #1A1A1A; --field: #141414; --ink: #F2F2F0; --muted: #A5A5A0;
+    --line: #2C2C2A; --line-strong: #5A5A56; --accent: #F2F2F0; --accent-ink: #0B0B0B;
+    --tile: #232322; --tile-ink: #44443F; --hero: #000000; --hero-ink: #F2F2F0; --hero-muted: #A5A5A0;
+    --focus: #6CC0F0; --danger: #FF8A80; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #101010; --surface: #1A1A1A; --field: #141414; --ink: #F2F2F0; --muted: #A5A5A0;
+  --line: #2C2C2A; --line-strong: #5A5A56; --accent: #F2F2F0; --accent-ink: #0B0B0B;
+  --tile: #232322; --tile-ink: #44443F; --hero: #000000; --hero-ink: #F2F2F0; --hero-muted: #A5A5A0;
+  --focus: #6CC0F0; --danger: #FF8A80; color-scheme: dark;
+}
+/* dark bands keep black in both themes: tokens are flipped inside them */
+.on-dark {
+  --bg: var(--hero); --ink: var(--hero-ink); --muted: var(--hero-muted);
+  --accent: var(--hero-ink); --accent-ink: var(--hero); --line-strong: #6A6A66; --line: #2E2E2C; --focus: #6CC0F0;
+  background: var(--bg); color: var(--ink);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--body); font-size: 16px; line-height: 1.65;
+  -webkit-text-size-adjust: 100%;
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  z-index: 60; background: var(--bg);
+}
+bn, en { display: inline; }
+:root:not([data-lang="en"]) en { display: none; }
+:root[data-lang="en"] bn { display: none; }
+
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; line-height: 1.2; }
+p { margin: 0; }
+a { color: inherit; }
+button { font-family: inherit; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+section[id] { scroll-margin-top: 72px; }
+
+.wrap {
+  max-width: 1120px; margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.eyebrow {
+  font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--muted); font-weight: 500;
+}
+
+.logo {
+  display: block; flex: 0 0 auto; border-radius: 50%; background: #fff var(--logo) center / cover no-repeat;
+  width: 46px; height: 46px; border: 1px solid var(--line);
+}
+
+/* header */
+.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50;
+  background: var(--bg); border-bottom: 1px solid var(--line);
+}
+.bar { display: flex; align-items: center; gap: 10px; padding-block: 8px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; min-width: 0; flex: 1; }
+.brand-text { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
+.brand-text .shop { font-family: var(--display); font-weight: 800; font-size: 14px; letter-spacing: .03em; }
+.brand-text .tag { font-size: 12px; color: var(--muted); }
+@media (max-width: 479px) { .brand-text .tag { display: none; } }
+.lang { display: flex; border: 1.5px solid var(--ink); border-radius: 3px; overflow: hidden; flex-shrink: 0; }
+.lang button {
+  font: 600 14px/1 var(--body); padding: 9px 11px; border: 0; background: transparent; color: var(--ink); cursor: pointer;
+}
+.lang button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.cart-btn {
+  position: relative; flex-shrink: 0; display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+  font: 700 14px/1 var(--display); padding: 10px 12px; border: 1.5px solid var(--ink); border-radius: 3px;
+  background: var(--accent); color: var(--accent-ink);
+}
+.cart-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.cart-btn .n { font-variant-numeric: tabular-nums; min-width: 1ch; }
+
+/* buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 700 16px/1 var(--display);
+  text-decoration: none; cursor: pointer; padding: 14px 22px; border-radius: 3px; border: 2px solid var(--ink);
+  background: transparent; color: var(--ink);
+}
+.btn-primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.btn-primary:hover { opacity: .88; }
+.btn-ghost:hover { background: var(--ink); color: var(--bg); }
+.btn[disabled] { opacity: .5; cursor: default; }
+
+/* hero */
+.hero { padding-top: clamp(28px, 6vw, 64px); }
+.hero-grid { display: grid; gap: 28px; grid-template-columns: 1fr; align-items: center; }
+@media (min-width: 800px) { .hero-grid { grid-template-columns: 1.4fr 1fr; } }
+.hero h1 { font-weight: 800; font-size: clamp(2rem, 6vw, 3.8rem); letter-spacing: -.01em; max-width: 16em; margin-top: 14px; }
+.hero .lede { margin-top: 16px; max-width: 56ch; font-size: 1.0625rem; color: var(--muted); }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+.hero-logo { justify-self: center; width: min(62vw, 300px); aspect-ratio: 1; border-radius: 50%; background: #fff var(--logo) center / cover no-repeat; box-shadow: 0 0 0 10px #1c1c1c, 0 0 0 11px #3a3a38; }
+@media (max-width: 799px) { .hero-logo { order: -1; width: 132px; justify-self: start; box-shadow: 0 0 0 6px #1c1c1c, 0 0 0 7px #3a3a38; margin: 6px 0 4px 7px; } }
+
+.sizes-label { margin-top: 40px; }
+.sizes {
+  margin: 10px 0 0; display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+  border-top: 1px solid var(--line-strong);
+}
+.sizes > div { padding: 14px 12px 20px 14px; border-left: 1px solid var(--line); min-width: 0; }
+.sizes > div:first-child { border-left: 0; padding-left: 0; }
+.sizes dt { font-family: var(--mono); font-weight: 500; font-size: clamp(1.1rem, 3.2vw, 1.5rem); line-height: 1.2; font-variant-numeric: tabular-nums; }
+.sizes dd { margin: 4px 0 0; font-size: 14px; color: var(--muted); line-height: 1.4; }
+@media (max-width: 479px) {
+  .sizes > div:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .sizes > div:nth-child(n+3) { border-top: 1px solid var(--line); }
+}
+.ruler {
+  height: 30px; margin-top: 30px;
+  background-image:
+    repeating-linear-gradient(90deg, var(--muted) 0 1.5px, transparent 1.5px 80px),
+    repeating-linear-gradient(90deg, var(--muted) 0 1px, transparent 1px 40px),
+    repeating-linear-gradient(90deg, var(--muted) 0 1px, transparent 1px 8px);
+  background-size: 100% 24px, 100% 16px, 100% 9px; background-repeat: no-repeat; background-position: 0 0;
+}
+
+/* products */
+.products { padding-block: clamp(40px, 7vw, 72px); }
+.sec-head { max-width: 60ch; }
+.sec-head h2 { font-weight: 800; font-size: clamp(1.6rem, 4.4vw, 2.4rem); margin-top: 8px; }
+.sec-head p { margin-top: 10px; color: var(--muted); }
+#edit-btn { margin-top: 18px; }
+.chips { display: flex; gap: 8px; margin-top: 22px; overflow-x: auto; padding-bottom: 6px; }
+.chips a {
+  flex: 0 0 auto; text-decoration: none; font-weight: 600; font-size: 14px; padding: 8px 14px;
+  border: 1.5px solid var(--ink); border-radius: 999px; white-space: nowrap;
+}
+.chips a:hover { background: var(--ink); color: var(--bg); }
+.cats { margin-top: 18px; display: grid; gap: 40px; }
+.cat-sec { scroll-margin-top: 80px; min-width: 0; }
+.cat-top { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 12px; padding-bottom: 12px; border-bottom: 2px solid var(--ink); margin-bottom: 16px; }
+.cat-top h3 { font-weight: 800; font-size: 1.45rem; }
+.code { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; font-weight: 500; color: var(--muted); }
+.pgrid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 165px), 1fr)); }
+.pcard {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 6px; overflow: hidden;
+  display: flex; flex-direction: column; min-width: 0; cursor: pointer;
+}
+.pcard:hover { border-color: var(--ink); }
+.pimg { aspect-ratio: 4 / 3; background: var(--tile); display: grid; place-items: center; overflow: hidden; }
+.pimg img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pimg .big { font-family: var(--mono); font-weight: 500; font-size: clamp(1.05rem, 4vw, 1.45rem); color: var(--tile-ink); text-align: center; padding: 8px; line-height: 1.25; overflow-wrap: anywhere; }
+.pbody { padding: 12px 12px 4px; display: flex; flex-direction: column; gap: 3px; flex: 1; }
+.pname { font-weight: 600; line-height: 1.35; overflow-wrap: anywhere; }
+.pspec { font-family: var(--mono); font-size: 12px; color: var(--muted); overflow-wrap: anywhere; }
+.pprice { margin-top: auto; padding-top: 8px; font-family: var(--display); font-weight: 800; font-size: 1.15rem; font-variant-numeric: tabular-nums; }
+.pprice.ask { font-size: 13px; font-weight: 600; color: var(--muted); }
+.pact { padding: 10px 12px 12px; }
+.add { width: 100%; padding: 11px 10px; font-size: 14px; }
+.stepper { display: flex; align-items: stretch; border: 1.5px solid var(--ink); border-radius: 3px; }
+.stepper button { flex: 0 0 40px; border: 0; background: transparent; color: var(--ink); font: 700 20px/1 var(--display); cursor: pointer; padding: 8px 0; }
+.stepper button:hover { background: var(--ink); color: var(--bg); }
+.stepper .q { flex: 1; display: grid; place-items: center; font-weight: 700; font-variant-numeric: tabular-nums; }
+.empty { color: var(--muted); font-size: 14px; }
+
+/* edit mode */
+.grid { margin-top: 28px; display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); }
+.cat { background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 18px 20px 8px; min-width: 0; }
+.cat-head { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding-bottom: 12px; }
+.cat-head .code { background: var(--ink); color: var(--bg); padding: 3px 8px; border-radius: 2px; }
+.cat h3 { font-weight: 700; font-size: 1.3rem; }
+.cat ul { list-style: none; margin: 0; padding: 0; }
+.cat li.edit { display: block; padding: 14px 0; border-top: 1px dashed var(--line-strong); }
+.th { width: 56px; height: 56px; object-fit: cover; border-radius: 3px; border: 1px solid var(--line); }
+.e-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); }
+.e-grid label { display: grid; gap: 4px; font-size: 12px; font-weight: 600; color: var(--muted); min-width: 0; }
+.e-grid input {
+  font: 400 16px/1.3 var(--body); color: var(--ink); background: var(--field);
+  border: 1px solid var(--line-strong); border-radius: 3px; padding: 8px 10px; width: 100%; min-width: 0;
+}
+.e-img { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; grid-column: 1 / -1; }
+.mini {
+  font: 600 13px/1 var(--body); padding: 9px 12px; border: 1.5px solid var(--ink);
+  background: transparent; color: var(--ink); border-radius: 3px; cursor: pointer;
+}
+.mini.danger { border-color: var(--danger); color: var(--danger); }
+.add-row { padding: 10px 0 12px; border-top: 1px dashed var(--line-strong); }
+.adminbar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 45;
+  padding: 12px max(16px, env(safe-area-inset-right, 0px)) calc(12px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px;
+}
+.adminbar .btn { padding: 11px 18px; font-size: 15px; }
+.adminbar .st { font-size: 14px; flex: 1 1 200px; min-width: 0; }
+body.editing main { padding-bottom: 130px; }
+body.editing .cartbar, body.editing .wa-fab, body.editing .cart-btn { display: none; }
+
+/* why */
+.why { padding-block: clamp(40px, 7vw, 68px); }
+.why h2 { font-weight: 800; font-size: clamp(1.6rem, 4.4vw, 2.4rem); margin-top: 8px; max-width: 20em; }
+.why-grid { margin-top: 28px; display: grid; gap: 28px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); }
+.why-grid > div { border-top: 1px solid var(--line-strong); padding-top: 14px; min-width: 0; }
+.why-grid h3 { font-weight: 700; font-size: 1.2rem; }
+.why-grid p { margin-top: 8px; color: var(--muted); }
+
+/* contact */
+.order { padding-block: clamp(40px, 7vw, 72px); }
+.order-grid { display: grid; gap: 32px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); align-items: start; }
+.order-grid > * { min-width: 0; }
+.contact { margin-top: 24px; display: grid; gap: 16px; }
+.contact dt { font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.contact dd { margin: 2px 0 0; font-size: 1.1rem; font-weight: 500; overflow-wrap: anywhere; }
+.contact .num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 20px; display: grid; gap: 16px; }
+.field { display: grid; gap: 6px; min-width: 0; }
+.field label { font-weight: 600; font-size: 14px; }
+.field input, .field textarea {
+  width: 100%; font: 400 16px/1.4 var(--body); color: var(--ink); background: var(--field);
+  border: 1px solid var(--line-strong); border-radius: 3px; padding: 11px 12px; min-width: 0;
+}
+.field textarea { resize: vertical; min-height: 96px; }
+.field input::placeholder, .field textarea::placeholder { color: var(--muted); opacity: .8; }
+.warn { font-size: 14px; font-weight: 600; color: var(--danger); min-height: 1.2em; }
+
+footer { padding-block: 22px; font-size: 14px; border-top: 1px solid var(--line); }
+footer .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+footer .logo { width: 34px; height: 34px; }
+
+/* floating WhatsApp + cart bar */
+.wa-fab {
+  position: fixed; z-index: 30; right: max(14px, env(safe-area-inset-right, 0px)); bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font: 700 14px/1 var(--display);
+  background: var(--accent); color: var(--accent-ink); border: 2px solid var(--bg); padding: 12px 16px; border-radius: 999px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.3);
+}
+.wa-fab svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+body.has-cart .wa-fab { bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
+.cartbar {
+  position: fixed; z-index: 35; left: 0; right: 0; bottom: 0; border: 0; width: 100%; text-align: left; cursor: pointer;
+  background: var(--accent); color: var(--accent-ink);
+  padding: 14px max(16px, env(safe-area-inset-right, 0px)) calc(14px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; font: 700 16px/1.2 var(--display);
+}
+.cartbar .sum { font-variant-numeric: tabular-nums; }
+
+/* cart sheet */
+.overlay { position: fixed; inset: 0; z-index: 70; background: rgba(0,0,0,.6); display: flex; align-items: flex-end; justify-content: center; }
+.sheet {
+  background: var(--surface); color: var(--ink); width: 100%; max-width: 580px; max-height: 92vh; overflow-y: auto;
+  border-radius: 14px 14px 0 0; padding: 18px max(16px, env(safe-area-inset-right, 0px)) calc(20px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+  display: grid; gap: 14px; align-content: start;
+}
+@media (min-width: 700px) { .overlay { align-items: center; } .sheet { border-radius: 10px; } }
+.sheet-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.sheet-head h2 { font-weight: 800; font-size: 1.4rem; }
+.x { border: 1.5px solid var(--ink); background: transparent; color: var(--ink); width: 40px; height: 40px; border-radius: 3px; font-size: 20px; line-height: 1; cursor: pointer; }
+.crow { display: grid; grid-template-columns: 1fr auto; gap: 6px 12px; padding: 12px 0; border-top: 1px solid var(--line); align-items: center; }
+.crow .nm { font-weight: 600; overflow-wrap: anywhere; }
+.crow .sp { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.crow .lt { font-family: var(--display); font-weight: 800; text-align: right; font-variant-numeric: tabular-nums; }
+.crow .stepper { width: 128px; }
+.crow .rm { justify-self: end; border: 0; background: transparent; color: var(--danger); font: 600 13px/1 var(--body); cursor: pointer; padding: 8px 0 8px 8px; }
+.totals { border-top: 2px solid var(--ink); padding-top: 12px; display: grid; gap: 4px; }
+.totals .tl { display: flex; justify-content: space-between; gap: 12px; font-family: var(--display); font-weight: 800; font-size: 1.2rem; font-variant-numeric: tabular-nums; }
+.totals .nt { font-size: 13px; color: var(--muted); }
+.note { font-size: 14px; color: var(--muted); }
+.link-btn { border: 0; background: transparent; color: var(--muted); text-decoration: underline; font: 500 14px/1 var(--body); cursor: pointer; padding: 6px 0; justify-self: start; }
+</style>
+
+<template id="shell">
+<header class="top">
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="M/S ORNOB ENTERPRISE">
+      <span class="logo" role="img" aria-label="MRO"></span>
+      <span class="brand-text"><strong class="shop">M/S ORNOB ENTERPRISE</strong><span class="tag"><bn>বিল্ডিং ও হার্ডওয়্যার সরবরাহ</bn><en>Building &amp; hardware supply</en></span></span>
+    </a>
+    <div class="lang" role="group" aria-label="Language / ভাষা">
+      <button type="button" id="btn-bn" aria-pressed="true">বাংলা</button>
+      <button type="button" id="btn-en" aria-pressed="false">EN</button>
+    </div>
+    <button type="button" class="cart-btn" id="cart-open" aria-label="Cart / কার্ট">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+      <span class="n" id="cart-count">0</span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <section class="hero on-dark" id="top">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow"><bn>নির্মাণ ও মেরামত সামগ্রী</bn><en>Construction &amp; repair supplies</en></p>
+          <h1>
+            <bn>ঘর গড়া ও মেরামতের সব মাল, এক জায়গায়</bn>
+            <en>Everything to build, fit and repair, in one place</en>
+          </h1>
+          <p class="lede">
+            <bn>সেনেটারি, বাথরুম ফিটিংস, সিমেন্ট, সাবমার্সিবল পাম্প, হার্ডওয়্যার ও ইলেকট্রিক পণ্য। পণ্যে চাপ দিয়ে কার্টে রাখুন, তারপর হোয়াটসঅ্যাপে অর্ডার পাঠান।</bn>
+            <en>Sanitary ware, bathroom fittings, cement, submersible pumps, hardware and electrical goods. Tap a product to add it to your cart, then send the order on WhatsApp.</en>
+          </p>
+          <div class="cta">
+            <a class="btn btn-primary" href="#products"><bn>পণ্য দেখুন ও অর্ডার করুন</bn><en>Browse &amp; order</en></a>
+            <a class="btn btn-ghost" id="hero-wa" href="https://wa.me/8801922786011" target="_blank" rel="noopener"><bn>হোয়াটসঅ্যাপে মেসেজ</bn><en>Message on WhatsApp</en></a>
+          </div>
+        </div>
+        <div class="hero-logo" role="img" aria-label="MRO"></div>
+      </div>
+
+      <p class="eyebrow sizes-label"><bn>সাধারণ মাপ এক নজরে</bn><en>Common sizes at a glance</en></p>
+      <dl class="sizes">
+        <div><dt>50 kg</dt><dd><bn>সিমেন্ট, প্রতি ব্যাগ</bn><en>Cement, per bag</en></dd></div>
+        <div><dt>0.5–5 HP</dt><dd><bn>সাবমার্সিবল পাম্প</bn><en>Submersible pumps</en></dd></div>
+        <div><dt>½″–4″</dt><dd><bn>পাইপ ও ফিটিংস</bn><en>Pipes &amp; fittings</en></dd></div>
+        <div><dt>1.5–6 mm²</dt><dd><bn>ইলেকট্রিক তার</bn><en>Electrical wire</en></dd></div>
+      </dl>
+      <div class="ruler" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <section class="products" id="products">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow"><bn>পণ্য তালিকা</bn><en>Product range</en></p>
+        <h2><bn>পণ্যে চাপ দিন, কার্টে রাখুন</bn><en>Tap a product to add it</en></h2>
+        <p><bn>যে পণ্যের দাম দেওয়া নেই, সেটাও কার্টে রাখতে পারবেন। আমরা দাম জানিয়ে দেব।</bn><en>You can add products without a listed price too. We will reply with the price.</en></p>
+        <button class="btn btn-ghost" type="button" id="edit-btn" hidden><bn>পণ্য, দাম ও ছবি এডিট করুন</bn><en>Edit products, prices &amp; photos</en></button>
+      </div>
+      <nav class="chips" id="chips" aria-label="Categories"></nav>
+      <div class="cats" id="grid"></div>
+    </div>
+  </section>
+
+  <section class="why on-dark">
+    <div class="wrap">
+      <p class="eyebrow"><bn>কেন আমাদের কাছে</bn><en>Why us</en></p>
+      <h2><bn>পুরো কাজের মাল একসাথে, ভুল মাপ ছাড়া</bn><en>The whole job in one order, in the right sizes</en></h2>
+      <div class="why-grid">
+        <div>
+          <h3><bn>এক দোকানে সব</bn><en>One supplier for the job</en></h3>
+          <p><bn>সিমেন্ট থেকে সুইচ পর্যন্ত আলাদা আলাদা দোকানে ঘুরতে হয় না।</bn><en>From cement to switches, no running between shops.</en></p>
+        </div>
+        <div>
+          <h3><bn>ঠিক মাপ, ঠিক রেটিং</bn><en>Right size, right rating</en></h3>
+          <p><bn>পাম্পের এইচপি, তারের মাপ বা পাইপের ইঞ্চি জানালে আমরা বেছে দিই।</bn><en>Tell us the pump HP, wire gauge or pipe size and we help you pick.</en></p>
+        </div>
+        <div>
+          <h3><bn>আগে দাম, পরে সিদ্ধান্ত</bn><en>Prices before you commit</en></h3>
+          <p><bn>কার্ট পাঠান, দামসহ কোটেশন পাবেন।</bn><en>Send your cart and get a priced quote.</en></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="order" id="order">
+    <div class="wrap order-grid">
+      <div>
+        <p class="eyebrow"><bn>যোগাযোগ</bn><en>Contact</en></p>
+        <div class="sec-head">
+          <h2><bn>সরাসরি হোয়াটসঅ্যাপে লিখুন</bn><en>Write to us on WhatsApp</en></h2>
+          <p><bn>কার্ট ছাড়া অন্য কিছু জানতে চাইলে এখানে লিখুন। বাটনে চাপলে হোয়াটসঅ্যাপ খুলে যাবে।</bn><en>For anything other than a cart order, write here. The button opens WhatsApp.</en></p>
+        </div>
+        <dl class="contact">
+          <div><dt><bn>দোকান</bn><en>Shop</en></dt><dd>M/S ORNOB ENTERPRISE</dd></div>
+          <div><dt><bn>ফোন, হোয়াটসঅ্যাপ ও বিকাশ</bn><en>Phone, WhatsApp &amp; bKash</en></dt><dd class="num">01922786011</dd></div>
+          <div><dt><bn>ঠিকানা</bn><en>Address</en></dt><dd><bn>কিসমত নতুন বাজার, সদর, ময়মনসিংহ</bn><en>Kismot Natun Bazar, Sadar, Mymensingh</en></dd></div>
+          <div><dt>Facebook</dt><dd><a href="https://www.facebook.com/share/1AQRHXhcmW/?mibextid=wwXIfr" target="_blank" rel="noopener">Mustafizur Rhamen Ornob</a></dd></div>
+          <div><dt>Email</dt><dd>omoralli068@gmail.com<br>mdornob2026@icloud.com</dd></div>
+        </dl>
+      </div>
+
+      <div class="card">
+        <div class="field">
+          <label for="q-name"><bn>আপনার নাম</bn><en>Your name</en></label>
+          <input id="q-name" type="text" autocomplete="name" data-ph-bn="যেমন: রহিম উদ্দিন" data-ph-en="e.g. Rahim Uddin">
+        </div>
+        <div class="field">
+          <label for="q-msg"><bn>কী জানতে চান</bn><en>What would you like to ask</en></label>
+          <textarea id="q-msg" data-ph-bn="যেমন: ১ এইচপি সাবমার্সিবল পাম্পের দাম কত?" data-ph-en="e.g. What is the price of a 1 HP submersible pump?"></textarea>
+        </div>
+        <p class="warn" id="q-warn" role="alert"></p>
+        <a class="btn btn-primary" id="q-send" href="https://wa.me/8801922786011" target="_blank" rel="noopener"><bn>হোয়াটসঅ্যাপে পাঠান</bn><en>Send on WhatsApp</en></a>
+        <p class="note"><bn>হোয়াটসঅ্যাপ খুললে মেসেজটি আগে থেকে লেখা থাকবে। শুধু Send চাপুন।</bn><en>WhatsApp opens with the message already written. Just press Send.</en></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="logo" role="img" aria-label="MRO"></span>
+    <span><bn>সেনেটারি · বাথরুম ফিটিংস · সিমেন্ট · সাবমার্সিবল পাম্প · হার্ডওয়্যার · ইলেকট্রিক</bn><en>Sanitary · Bathroom fittings · Cement · Submersible pumps · Hardware · Electrical</en></span>
+    <span>© 2026 M/S ORNOB ENTERPRISE · Kismot Natun Bazar, Sadar, Mymensingh</span>
+  </div>
+</footer>
+
+<a class="wa-fab" id="wa-fab" href="https://wa.me/8801922786011" target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-4.2A8 8 0 1 1 8.4 18.8L4 20z"/><path d="M9 9.5c.3 2.2 2.4 4.3 4.6 4.7l1.2-1.1-1.7-1-.8.6c-.8-.4-1.5-1.1-1.9-1.9l.6-.8-1-1.7L9 9.5z"/></svg>
+  <span><bn>হোয়াটসঅ্যাপ</bn><en>WhatsApp</en></span>
+</a>
+
+<button type="button" class="cartbar" id="cartbar" hidden>
+  <span><bn>কার্ট দেখুন</bn><en>View cart</en> · <span id="cb-count">0</span> <bn>পণ্য</bn><en>items</en></span>
+  <span class="sum" id="cb-sum"></span>
+</button>
+
+<div class="overlay" id="cart-overlay" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+    <div class="sheet-head">
+      <h2 id="cart-title"><bn>আপনার কার্ট</bn><en>Your cart</en></h2>
+      <button type="button" class="x" id="cart-close" aria-label="Close / বন্ধ">×</button>
+    </div>
+    <div id="cart-body"></div>
+  </div>
+</div>
+
+<div class="adminbar on-dark" id="adminbar" hidden>
+  <button class="btn btn-primary" type="button" id="save"><bn>সংরক্ষণ করুন</bn><en>Save changes</en></button>
+  <button class="btn btn-ghost" type="button" id="cancel"><bn>বাতিল</bn><en>Cancel</en></button>
+  <span class="st" id="admin-status" role="status"></span>
+</div>
+</template>
+
+<script type="application/json" id="site-data">{"cats":[{"id":"san","code":"MRO-SAN","bn":"সেনেটারি পণ্য","en":"Sanitary ware","items":[{"bn":"কমোড","en":"Commode (WC)","sbn":"P-trap / S-trap","sen":"P-trap / S-trap","price":1200,"img":""},{"bn":"ওয়াশ বেসিন","en":"Wash basin","sbn":"দেয়াল / পেডেস্টাল","sen":"Wall / pedestal","price":4000,"img":""},{"bn":"পিভিসি পাইপ 4’’","en":"PVC pipe","sbn":"4″(1.6)Modina","sen":"4″(2.7)Avg","price":55,"img":""},{"bn":"পানির ট্যাংক","en":"Water tank","sbn":"500–5000 L","sen":"500–5000 L","price":8,"img":""},{"bn":"4’’ ব্যান (মদিনা)","en":"4’’bend(Modina)","sbn":"High quality","sen":"","price":120,"img":""},{"bn":"4’’ T (মদিনা)","en":"4’’ T (Modina)","sbn":"High quality","sen":"High quality","price":190,"img":""},{"bn":"4” লং ট্র্যাপ (মদিনা)","en":"4” long trap (Modina)","sbn":"","sen":"","price":290,"img":""},{"bn":"সাইড ডোর বেন্ড (মদিনা)","en":"Side Door Bend","sbn":"","sen":"","price":180,"img":""},{"bn":"4”সাইড ডোর T","en":"4” Side Door T","sbn":"","sen":"","price":240,"img":""},{"bn":"4”অফসাইড বেন","en":"4” Off side ben","sbn":"","sen":"","price":190,"img":""},{"bn":"3” সি পাইপ (মদিনা)","en":"3” C paip (Modina)","sbn":"3”","sen":"3”","price":70,"img":""},{"bn":"3” সি পাইপ (আকিজ)","en":"3” C paip (Akij)","sbn":"3”","sen":"3”","price":75,"img":""},{"bn":"১/২” ডি আকিজ","en":"1/2” D Akij","sbn":"1/2”","sen":"1/2”","price":30,"img":""},{"bn":"১/২” ফিল্টার (আকিজ)","en":"1/2” felter( Akij)","sbn":"1/2”","sen":"1/2”","price":470,"img":""}]},{"id":"bth","code":"MRO-BTH","bn":"বাথরুম ফিটিংস","en":"Bathroom fittings","items":[{"bn":"ট্যাপ ও বিবকক(মেটাডোর)","en":"Taps & bib cocks(Metadoor)","sbn":"½″","sen":"½″","price":50,"img":""},{"bn":"শাওয়ার সেট (RFL)","en":"Shower set(RFL)","sbn":"হ্যান্ড / রেইন","sen":"Hand / rain","price":350,"img":""},{"bn":"ওয়াল ট্যাপ ( SS) সাত্তার","en":"Wall Tap (Sattar)(12 th year gurunty)","sbn":"1/2”","sen":"Chrome","price":1500,"img":""},{"bn":"ফ্লোর ড্রেন ও এক্সেসরিজ","en":"Floor drain & accessories","sbn":"","sen":"","price":250,"img":""},{"bn":"ওয়াটার টেক ট্যাপ (মালোশিয়ান)","en":"Water Take tap","sbn":"","sen":"","price":250,"img":""},{"bn":"পুশ সওয়ার","en":"Push shawar","sbn":"","sen":"","price":150,"img":""},{"bn":"বেসিন ট্যাপ (RFL)","en":"Besin Tap (RFL)","sbn":"90 ডিগ্রি","sen":"90 degree","price":380,"img":""},{"bn":"সিং ট্যাপ (RFL)","en":"Sing tap (RFL)","sbn":"৯০ ডিগ্রী","sen":"90 degree","price":350,"img":""}]},{"id":"cem","code":"MRO-CEM","bn":"সিমেন্ট","en":"Cement","items":[{"bn":"পোর্টল্যান্ড কম্পোজিট সিমেন্ট( শাহ সেপেশ্যাল)","en":"Portland composite cement (Shah Special)","sbn":"50 kg","sen":"50 kg","price":550,"img":""},{"bn":"হোয়াইট সিমেন্ট","en":"White cement","sbn":"ব্যাগ ১kg","sen":"Bag 1 kg","price":50,"img":""},{"bn":"সিমেন্ট আকিজ","en":"Cement Akij","sbn":"৫০ কেজি","sen":"50 kg","price":550,"img":""}]},{"id":"pmp","code":"MRO-PMP","bn":"সাবমার্সিবল পাম্প","en":"Submersible pumps","items":[{"bn":"সিঙ্গেল ফেজ পাম্প","en":"Single-phase pump","sbn":"1 HP ( মদিনা)","sen":"1 HP (Modina)","price":10500,"img":""},{"bn":"পাম্পের কেবল","en":"Pump cable","sbn":"মিটার","sen":"Per metre","price":30,"img":""}]},{"id":"hdw","code":"MRO-HDW","bn":"হার্ডওয়্যার","en":"Hardware","items":[{"bn":"স্ক্রু, বোল্ট ও নাট","en":"Screws, bolts & nuts","sbn":"M6–M20","sen":"M6–M20","price":15,"img":""},{"bn":"দরজার লক ও কব্জা","en":"Door locks & hinges","sbn":"সেট","sen":"Set","price":80,"img":""},{"bn":"তার কাটা","en":"Tar kata","sbn":"All","sen":"All","price":140,"img":""},{"bn":"স্ক্রু","en":"skru","sbn":"","sen":"","price":240,"img":""},{"bn":"স্টিল কাটা","en":"Stil কাটা","sbn":"","sen":"","price":240,"img":""}]},{"id":"elc","code":"MRO-ELC","bn":"ইলেকট্রিক পণ্য","en":"Electrical","items":[{"bn":"সুইচ ও সকেট","en":"Switches & sockets","sbn":"6 A / 16 A","sen":"6 A / 16 A","price":"","img":""},{"bn":"তার ও ক্যাবল","en":"Wire & cable","sbn":"1.5–6 mm²","sen":"1.5–6 mm²","price":"","img":""},{"bn":"এলইডি লাইট","en":"LED lights","sbn":"3–40 W","sen":"3–40 W","price":"","img":""},{"bn":"এমসিবি সার্কিট ব্রেকার","en":"MCB circuit breaker","sbn":"6–63 A","sen":"6–63 A","price":"","img":""}]}]}</script>
+<script id="app">
+(function () {
+  var FONT = 'https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@500;700;800&family=Hind+Siliguri:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap';
+  var CLOSE_SCRIPT = '</' + 'script>';
+  var WA = '8801922786011';
+  var SHOP = 'M/S ORNOB ENTERPRISE';
+
+  var tplEl = document.getElementById('shell');
+  document.body.insertBefore(tplEl.content.cloneNode(true), tplEl);
+
+  var state = JSON.parse(document.getElementById('site-data').textContent);
+  var draft = null, editing = false, assets = null, saving = false;
+  var cart = [];
+  var $ = function (id) { return document.getElementById(id); };
+  var grid = $('grid');
+
+  function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function escA(s) { return esc(s).replace(/"/g, '&quot;'); }
+  function bi(b, e) { return '<bn>' + esc(b) + '</bn><en>' + esc(e) + '</en>'; }
+  function waLink(text) { return 'https://wa.me/' + WA + '?text=' + encodeURIComponent(text); }
+
+  var root = document.documentElement;
+  function curLang() { return root.getAttribute('data-lang') === 'en' ? 'en' : 'bn'; }
+  function pick(b, e) { return curLang() === 'en' ? (e || b) : b; }
+
+  function num(p) {
+    if (p === '' || p == null) return null;
+    var n = Number(p);
+    return isNaN(n) ? null : n;
+  }
+  function moneyHtml(n) { return bi('৳ ' + n.toLocaleString('bn-BD'), '৳ ' + n.toLocaleString('en-US')); }
+  function moneyText(n) { return '৳ ' + n.toLocaleString(curLang() === 'en' ? 'en-US' : 'bn-BD'); }
+  function qtyHtml(n) { return bi(n.toLocaleString('bn-BD'), n.toLocaleString('en-US')); }
+
+  /* ---------- cart ---------- */
+  function keyOf(cid, it) { return cid + '|' + it.bn; }
+  function findItem(key) {
+    for (var a = 0; a < state.cats.length; a++) {
+      var c = state.cats[a];
+      for (var b = 0; b < c.items.length; b++) { if (keyOf(c.id, c.items[b]) === key) return c.items[b]; }
+    }
+    return null;
+  }
+  function qtyOf(key) { for (var i = 0; i < cart.length; i++) { if (cart[i].k === key) return cart[i].qty; } return 0; }
+  function saveCart() { try { localStorage.setItem('mro-cart', JSON.stringify(cart)); } catch (e) {} }
+  try {
+    var raw = localStorage.getItem('mro-cart');
+    if (raw) { var arr = JSON.parse(raw); if (Array.isArray(arr)) cart = arr.filter(function (x) { return x && x.k && x.qty > 0; }); }
+  } catch (e) {}
+
+  function setQty(key, qty, snap) {
+    for (var i = 0; i < cart.length; i++) {
+      if (cart[i].k === key) {
+        if (qty <= 0) cart.splice(i, 1); else cart[i].qty = Math.min(qty, 999);
+        saveCart(); refreshCart(); return;
+      }
+    }
+    if (qty > 0 && snap) { snap.k = key; snap.qty = qty; cart.push(snap); saveCart(); refreshCart(); }
+  }
+  function snapOf(it) {
+    return { bn: it.bn, en: it.en || it.bn, sbn: it.sbn || it.sen || '', sen: it.sen || it.sbn || '', price: it.price };
+  }
+  function live(c) {
+    var it = findItem(c.k);
+    if (!it) return c;
+    return { k: c.k, qty: c.qty, bn: it.bn, en: it.en || it.bn, sbn: it.sbn || it.sen || '', sen: it.sen || it.sbn || '', price: it.price };
+  }
+  function cartTotals() {
+    var sum = 0, unpriced = 0, count = 0;
+    cart.forEach(function (c) {
+      var l = live(c); count += c.qty;
+      var p = num(l.price);
+      if (p == null) unpriced++; else sum += p * c.qty;
+    });
+    return { sum: sum, unpriced: unpriced, count: count };
+  }
+
+  function refreshCart() {
+    var t = cartTotals();
+    $('cart-count').textContent = t.count;
+    $('cb-count').textContent = t.count;
+    $('cb-sum').innerHTML = t.sum > 0 ? moneyHtml(t.sum) : '';
+    $('cartbar').hidden = t.count === 0;
+    document.body.classList.toggle('has-cart', t.count > 0);
+    if (!editing) render();
+    if (!$('cart-overlay').hidden) renderCart();
+  }
+
+  /* ---------- products ---------- */
+  function cardHtml(c, it, ci, ii) {
+    var key = keyOf(c.id, it);
+    var q = qtyOf(key);
+    var specB = it.sbn || it.sen || '', specE = it.sen || it.sbn || '';
+    var visual = it.img
+      ? '<img src="' + escA(it.img) + '" alt="" loading="lazy">'
+      : '<span class="big">' + (specB || specE ? bi(specB, specE) : 'MRO') + '</span>';
+    var spec = it.img && (specB || specE) ? '<span class="pspec">' + bi(specB, specE) + '</span>' : '';
+    var p = num(it.price);
+    var price = p != null ? '<div class="pprice">' + moneyHtml(p) + '</div>' : '<div class="pprice ask">' + bi('দাম জানতে কার্টে রাখুন', 'Add to cart for price') + '</div>';
+    var act = q > 0
+      ? '<div class="stepper"><button type="button" data-a="dec" data-c="' + ci + '" data-i="' + ii + '" aria-label="-">−</button><span class="q">' + qtyHtml(q) + '</span><button type="button" data-a="inc" data-c="' + ci + '" data-i="' + ii + '" aria-label="+">+</button></div>'
+      : '<button type="button" class="btn btn-primary add" data-a="add" data-c="' + ci + '" data-i="' + ii + '">' + bi('কার্টে রাখুন', 'Add to cart') + '</button>';
+    return '<article class="pcard" data-c="' + ci + '" data-i="' + ii + '"><div class="pimg">' + visual + '</div>' +
+      '<div class="pbody"><span class="pname">' + bi(it.bn, it.en || it.bn) + '</span>' + spec + price + '</div>' +
+      '<div class="pact">' + act + '</div></article>';
+  }
+
+  function fld(f, lb, le, val, extra) {
+    return '<label><span>' + bi(lb, le) + '</span><input data-f="' + f + '" type="text" value="' + escA(val) + '"' + (extra || '') + '></label>';
+  }
+  function editRow(it, c, i) {
+    var thumb = it.img ? '<img class="th" src="' + escA(it.img) + '" alt="">' : '';
+    var imgBtns = assets
+      ? '<button type="button" class="mini" data-act="img" data-c="' + c + '" data-i="' + i + '">' + bi(it.img ? 'ছবি বদলান' : 'ছবি দিন', it.img ? 'Change photo' : 'Add photo') + '</button>' +
+        (it.img ? '<button type="button" class="mini" data-act="noimg" data-c="' + c + '" data-i="' + i + '">' + bi('ছবি সরান', 'Remove photo') + '</button>' : '')
+      : '';
+    return '<li class="edit" data-c="' + c + '" data-i="' + i + '"><div class="e-grid">' +
+      fld('bn', 'নাম (বাংলা)', 'Name (Bangla)', it.bn) +
+      fld('en', 'নাম (English)', 'Name (English)', it.en) +
+      fld('sbn', 'মাপ / ইউনিট (বাংলা)', 'Size / unit (Bangla)', it.sbn) +
+      fld('sen', 'মাপ / ইউনিট (English)', 'Size / unit (English)', it.sen) +
+      fld('price', 'দাম (৳)', 'Price (৳)', it.price, ' inputmode="decimal"') +
+      '<div class="e-img">' + thumb + imgBtns +
+        '<button type="button" class="mini danger" data-act="del" data-c="' + c + '" data-i="' + i + '">' + bi('পণ্যটি মুছুন', 'Delete product') + '</button>' +
+      '</div></div></li>';
+  }
+
+  function render() {
+    var data = editing ? draft : state;
+    $('chips').hidden = editing;
+    if (editing) {
+      grid.className = 'grid';
+      grid.innerHTML = data.cats.map(function (c, ci) {
+        var rows = c.items.map(function (it, ii) { return editRow(it, ci, ii); }).join('');
+        return '<article class="cat" id="cat-' + c.id + '"><div class="cat-head"><span class="code">' + esc(c.code) +
+          '</span><h3>' + bi(c.bn, c.en) + '</h3></div><ul>' + rows + '</ul>' +
+          '<div class="add-row"><button type="button" class="mini" data-act="add" data-c="' + ci + '">+ ' + bi('নতুন পণ্য', 'Add product') + '</button></div></article>';
+      }).join('');
+      return;
+    }
+    grid.className = 'cats';
+    $('chips').innerHTML = data.cats.map(function (c) {
+      return '<a href="#cat-' + esc(c.id) + '">' + bi(c.bn, c.en) + '</a>';
+    }).join('');
+    grid.innerHTML = data.cats.map(function (c, ci) {
+      var cards = c.items.map(function (it, ii) { return cardHtml(c, it, ci, ii); }).join('');
+      return '<section class="cat-sec" id="cat-' + esc(c.id) + '"><div class="cat-top"><h3>' + bi(c.bn, c.en) +
+        '</h3><span class="code">' + esc(c.code) + '</span></div>' +
+        (cards ? '<div class="pgrid">' + cards + '</div>' : '<p class="empty">' + bi('শীঘ্রই আসছে', 'Coming soon') + '</p>') + '</section>';
+    }).join('');
+  }
+
+  grid.addEventListener('click', function (e) {
+    if (editing) return;
+    var card = e.target.closest ? e.target.closest('.pcard') : null;
+    if (!card) return;
+    var c = state.cats[+card.dataset.c], it = c.items[+card.dataset.i];
+    if (!it) return;
+    var key = keyOf(c.id, it);
+    var btn = e.target.closest('[data-a]');
+    var a = btn ? btn.dataset.a : (qtyOf(key) === 0 ? 'add' : null);
+    if (a === 'add') setQty(key, 1, snapOf(it));
+    else if (a === 'inc') setQty(key, qtyOf(key) + 1);
+    else if (a === 'dec') setQty(key, qtyOf(key) - 1);
+  });
+
+  /* ---------- cart sheet ---------- */
+  var ov = $('cart-overlay'), body = $('cart-body');
+  var custName = '', custPhone = '', custAddr = '', custNote = '';
+
+  function orderText() {
+    var l = curLang();
+    var L = l === 'en'
+      ? { head: SHOP + ' - Order', name: 'Name', phone: 'Mobile', addr: 'Address', items: 'Items', total: 'Total (priced items)', ask: 'Please tell me the price of the items without a price.', note: 'Note' }
+      : { head: SHOP + ' - অর্ডার', name: 'নাম', phone: 'মোবাইল', addr: 'ঠিকানা', items: 'পণ্য', total: 'মোট (দাম দেওয়া পণ্য)', ask: 'যে পণ্যের দাম দেওয়া নেই, তার দাম জানাবেন।', note: 'মন্তব্য' };
+    var lines = [L.head, L.name + ': ' + custName.trim(), L.phone + ': ' + custPhone.trim()];
+    if (custAddr.trim()) lines.push(L.addr + ': ' + custAddr.trim());
+    lines.push('', L.items + ':');
+    var t = cartTotals();
+    cart.forEach(function (c, i) {
+      var x = live(c), p = num(x.price);
+      var sp = pick(x.sbn, x.sen);
+      lines.push((i + 1) + '. ' + pick(x.bn, x.en) + (sp ? ' (' + sp + ')' : '') + ' x ' + c.qty + (p != null ? ' = ' + moneyText(p * c.qty) : ''));
+    });
+    if (t.sum > 0) lines.push('', L.total + ': ' + moneyText(t.sum));
+    if (t.unpriced > 0) lines.push(L.ask);
+    if (custNote.trim()) lines.push('', L.note + ': ' + custNote.trim());
+    return lines.join('\n');
+  }
+  function updateSendLink() {
+    var a = $('send-wa');
+    if (a) a.href = waLink(orderText());
+  }
+
+  function renderCart() {
+    if (!cart.length) {
+      body.innerHTML = '<p class="empty">' + bi('কার্ট খালি। পণ্যে চাপ দিয়ে কার্টে রাখুন।', 'Your cart is empty. Tap a product to add it.') + '</p>' +
+        '<button type="button" class="btn btn-ghost" id="cart-browse">' + bi('পণ্য দেখুন', 'Browse products') + '</button>';
+      return;
+    }
+    var t = cartTotals();
+    var rows = cart.map(function (c, i) {
+      var x = live(c), p = num(x.price);
+      var sp = (x.sbn || x.sen) ? '<div class="sp">' + bi(x.sbn || x.sen, x.sen || x.sbn) + '</div>' : '';
+      return '<div class="crow"><div><div class="nm">' + bi(x.bn, x.en) + '</div>' + sp + '</div>' +
+        '<div class="lt">' + (p != null ? moneyHtml(p * c.qty) : '<span class="sp">' + bi('দাম জানানো হবে', 'Price on request') + '</span>') + '</div>' +
+        '<div class="stepper"><button type="button" data-ca="dec" data-n="' + i + '" aria-label="-">−</button><span class="q">' + qtyHtml(c.qty) + '</span><button type="button" data-ca="inc" data-n="' + i + '" aria-label="+">+</button></div>' +
+        '<button type="button" class="rm" data-ca="rm" data-n="' + i + '">' + bi('বাদ দিন', 'Remove') + '</button></div>';
+    }).join('');
+    var totals = '<div class="totals">' +
+      (t.sum > 0 ? '<div class="tl"><span>' + bi('মোট', 'Total') + '</span><span>' + moneyHtml(t.sum) + '</span></div>' : '') +
+      (t.unpriced > 0 ? '<div class="nt">' + bi('দাম ছাড়া পণ্যের দাম আমরা হোয়াটসঅ্যাপে জানাব।', 'We will reply on WhatsApp with the price of items that have none.') + '</div>' : '') + '</div>';
+    var form =
+      '<div class="field"><label for="c-name">' + bi('আপনার নাম', 'Your name') + '</label><input id="c-name" type="text" autocomplete="name" value="' + escA(custName) + '"></div>' +
+      '<div class="field"><label for="c-phone">' + bi('মোবাইল নম্বর', 'Mobile number') + '</label><input id="c-phone" type="tel" inputmode="tel" autocomplete="tel" value="' + escA(custPhone) + '"></div>' +
+      '<div class="field"><label for="c-addr">' + bi('ডেলিভারির ঠিকানা', 'Delivery address') + '</label><input id="c-addr" type="text" autocomplete="street-address" value="' + escA(custAddr) + '"></div>' +
+      '<div class="field"><label for="c-note">' + bi('মন্তব্য (ইচ্ছা হলে)', 'Note (optional)') + '</label><input id="c-note" type="text" value="' + escA(custNote) + '"></div>';
+    body.innerHTML = rows + totals + '<div class="card" style="margin-top:6px">' + form +
+      '<p class="warn" id="c-warn" role="alert"></p>' +
+      '<a class="btn btn-primary" id="send-wa" href="' + escA(waLink(orderText())) + '" target="_blank" rel="noopener">' + bi('হোয়াটসঅ্যাপে অর্ডার পাঠান', 'Send order on WhatsApp') + '</a>' +
+      '<p class="note">' + bi('হোয়াটসঅ্যাপ খুললে অর্ডারটি আগে থেকে লেখা থাকবে। শুধু Send চাপুন। Send না চাপলে অর্ডার আমাদের কাছে পৌঁছাবে না।', 'WhatsApp opens with your order already written. Press Send there. The order does not reach us until you do.') + '</p></div>' +
+      '<button type="button" class="link-btn" id="cart-clear">' + bi('কার্ট খালি করুন', 'Clear cart') + '</button>';
+  }
+
+  function openCart() { ov.hidden = false; renderCart(); var x = $('cart-close'); if (x) x.focus(); }
+  function closeCart() { ov.hidden = true; }
+  $('cart-open').addEventListener('click', openCart);
+  $('cartbar').addEventListener('click', openCart);
+  $('cart-close').addEventListener('click', closeCart);
+  ov.addEventListener('click', function (e) { if (e.target === ov) closeCart(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !ov.hidden) closeCart(); });
+
+  body.addEventListener('click', function (e) {
+    var t = e.target;
+    if (t.id === 'cart-browse') { closeCart(); location.hash = 'products'; return; }
+    if (t.closest && t.closest('#cart-clear')) { cart = []; saveCart(); refreshCart(); return; }
+    var b = t.closest ? t.closest('[data-ca]') : null;
+    if (b) {
+      var c = cart[+b.dataset.n]; if (!c) return;
+      if (b.dataset.ca === 'inc') setQty(c.k, c.qty + 1);
+      else if (b.dataset.ca === 'dec') setQty(c.k, c.qty - 1);
+      else setQty(c.k, 0);
+      return;
+    }
+    var send = t.closest ? t.closest('#send-wa') : null;
+    if (send) {
+      var warn = $('c-warn');
+      if (!custName.trim() || !custPhone.trim()) {
+        e.preventDefault();
+        warn.innerHTML = bi('নাম ও মোবাইল নম্বর লিখুন।', 'Please enter your name and mobile number.');
+        return;
+      }
+      warn.textContent = '';
+    }
+  });
+  body.addEventListener('input', function (e) {
+    var id = e.target.id;
+    if (id === 'c-name') custName = e.target.value;
+    else if (id === 'c-phone') custPhone = e.target.value;
+    else if (id === 'c-addr') custAddr = e.target.value;
+    else if (id === 'c-note') custNote = e.target.value;
+    else return;
+    updateSendLink();
+  });
+
+  /* ---------- enquiry form ---------- */
+  function enquiryText() {
+    var l = curLang();
+    var nm = $('q-name').value.trim(), msg = $('q-msg').value.trim();
+    return (l === 'en' ? SHOP + ' - Enquiry' : SHOP + ' - জিজ্ঞাসা') + '\n' +
+      (nm ? (l === 'en' ? 'Name: ' : 'নাম: ') + nm + '\n' : '') + msg;
+  }
+  function updateEnquiry() { $('q-send').href = waLink(enquiryText()); }
+  $('q-name').addEventListener('input', updateEnquiry);
+  $('q-msg').addEventListener('input', updateEnquiry);
+  $('q-send').addEventListener('click', function (e) {
+    if (!$('q-msg').value.trim()) {
+      e.preventDefault();
+      $('q-warn').innerHTML = bi('কী জানতে চান লিখুন।', 'Please write your question.');
+    } else { $('q-warn').textContent = ''; }
+  });
+
+  /* ---------- language ---------- */
+  function setLang(l, save) {
+    root.setAttribute('data-lang', l);
+    root.setAttribute('lang', l);
+    $('btn-bn').setAttribute('aria-pressed', String(l === 'bn'));
+    $('btn-en').setAttribute('aria-pressed', String(l === 'en'));
+    Array.prototype.forEach.call(document.querySelectorAll('[data-ph-bn]'), function (el) {
+      el.placeholder = el.getAttribute('data-ph-' + l);
+    });
+    var greet = l === 'en' ? 'Hello, I would like to ask about your products.' : 'আসসালামু আলাইকুম, আপনাদের পণ্য সম্পর্কে জানতে চাই।';
+    $('wa-fab').href = waLink(greet);
+    $('hero-wa').href = waLink(greet);
+    updateEnquiry();
+    if (!ov.hidden) renderCart();
+    if (save) { try { localStorage.setItem('mro-lang', l); } catch (e) {} }
+  }
+  var start = 'bn';
+  try { if (localStorage.getItem('mro-lang') === 'en') start = 'en'; } catch (e) {}
+  render();
+  setLang(start, false);
+  refreshCart();
+  $('btn-bn').addEventListener('click', function () { setLang('bn', true); });
+  $('btn-en').addEventListener('click', function () { setLang('en', true); });
+
+  /* ---------- owner editing ---------- */
+  var editBtn = $('edit-btn'), bar = $('adminbar'), ast = $('admin-status');
+  function say(html) { ast.innerHTML = html; }
+
+  var C = window.claude && window.claude.use ? window.claude : null;
+  if (C) {
+    C.use('user').then(function (u) {
+      if (!u) return;
+      return Promise.all([u.canEdit(), u.isOwner()]).then(function (r) {
+        if (r[0] || r[1]) editBtn.hidden = false;
+      });
+    }).catch(function () {});
+    C.use('assets').then(function (a) { assets = a || null; }).catch(function () {});
+  }
+
+  function enterEdit() {
+    draft = JSON.parse(JSON.stringify(state));
+    editing = true;
+    document.body.classList.add('editing');
+    bar.hidden = false; editBtn.hidden = true;
+    say(bi('পরিবর্তন শেষে "সংরক্ষণ করুন" চাপুন।', 'Press "Save changes" when you are done.'));
+    render();
+  }
+  function leaveEdit() {
+    editing = false; draft = null;
+    document.body.classList.remove('editing');
+    bar.hidden = true; editBtn.hidden = false;
+    say('');
+    render();
+  }
+  editBtn.addEventListener('click', enterEdit);
+  $('cancel').addEventListener('click', function () { if (!saving) leaveEdit(); });
+
+  grid.addEventListener('input', function (e) {
+    var t = e.target;
+    if (!editing || !t.dataset || !t.dataset.f) return;
+    var li = t.closest('li');
+    draft.cats[+li.dataset.c].items[+li.dataset.i][t.dataset.f] = t.value;
+  });
+
+  function shrink(file) {
+    return createImageBitmap(file).then(function (bm) {
+      var sc = Math.min(1, 900 / Math.max(bm.width, bm.height));
+      var w = Math.round(bm.width * sc), h = Math.round(bm.height * sc);
+      var cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+      var ctx = cv.getContext('2d'); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, w, h); ctx.drawImage(bm, 0, 0, w, h);
+      return new Promise(function (res, rej) {
+        cv.toBlob(function (b) { b ? res(b) : rej(new Error('toBlob')); }, 'image/jpeg', 0.82);
+      });
+    }).catch(function () { return file; });
+  }
+  function pickImage(c, i) {
+    var inp = document.createElement('input');
+    inp.type = 'file'; inp.accept = 'image/*';
+    inp.addEventListener('change', function () {
+      var f = inp.files && inp.files[0];
+      if (!f) return;
+      say(bi('ছবি আপলোড হচ্ছে...', 'Uploading photo...'));
+      shrink(f).then(function (blob) { return assets.upload(blob); }).then(function (r) {
+        draft.cats[c].items[i].img = r.url;
+        render();
+        say(bi('ছবি যোগ হয়েছে। সংরক্ষণ করুন চাপলে পেজে দেখা যাবে।', 'Photo added. Press Save changes to publish it.'));
+      }).catch(function () {
+        say(bi('ছবি আপলোড হয়নি। ছোট ছবি দিয়ে আবার চেষ্টা করুন।', 'Photo upload failed. Try a smaller image.'));
+      });
+    });
+    inp.click();
+  }
+
+  grid.addEventListener('click', function (e) {
+    var b = e.target.closest ? e.target.closest('[data-act]') : null;
+    if (!b || !editing) return;
+    var act = b.dataset.act, c = +b.dataset.c, i = +b.dataset.i;
+    if (act === 'add') {
+      draft.cats[c].items.push({ bn: '', en: '', sbn: '', sen: '', price: '', img: '' });
+      render();
+      var lis = grid.querySelectorAll('#cat-' + draft.cats[c].id + ' li.edit');
+      var last = lis[lis.length - 1];
+      if (last) { var f = last.querySelector('input'); if (f) f.focus(); }
+    } else if (act === 'del') {
+      if (!b.dataset.sure) {
+        b.dataset.sure = '1';
+        b.innerHTML = bi('নিশ্চিত? আবার চাপুন', 'Sure? Tap again');
+        setTimeout(function () { if (b.isConnected) { delete b.dataset.sure; b.innerHTML = bi('পণ্যটি মুছুন', 'Delete product'); } }, 3000);
+        return;
+      }
+      draft.cats[c].items.splice(i, 1);
+      render();
+    } else if (act === 'img') {
+      if (assets) pickImage(c, i);
+    } else if (act === 'noimg') {
+      draft.cats[c].items[i].img = '';
+      render();
+    }
+  });
+
+  function toLatinDigits(s) { return String(s).replace(/[০-৯]/g, function (d) { return '০১২৩৪৫৬৭৮৯'.indexOf(d); }); }
+  function normalize(d) {
+    d.cats.forEach(function (c) {
+      c.items = c.items.filter(function (it) { return (it.bn || '').trim() || (it.en || '').trim(); });
+      c.items.forEach(function (it) {
+        it.bn = (it.bn || '').trim(); it.en = (it.en || '').trim();
+        if (!it.bn) it.bn = it.en;
+        it.sbn = (it.sbn || '').trim(); it.sen = (it.sen || '').trim();
+        var p = toLatinDigits(it.price == null ? '' : it.price).replace(/[,\s৳]/g, '');
+        it.price = (p !== '' && !isNaN(Number(p))) ? Number(p) : '';
+      });
+    });
+  }
+
+  function resetCss() {
+    var st = document.head ? document.head.querySelectorAll('style') : [];
+    for (var k = 0; k < st.length; k++) { if (/\[hidden\]/.test(st[k].textContent)) return st[k].textContent; }
+    return ':root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}';
+  }
+  function buildDoc(data) {
+    var json = JSON.stringify(data).replace(/</g, '\\u003c');
+    var content =
+      '<title>Ornob Enterprise</title>\n' +
+      '<meta name="claude:viewport-fit-sides" content="cover">\n' +
+      '<link rel="stylesheet" href="' + FONT + '">\n' +
+      '<style id="sitecss">' + $('sitecss').textContent + '</style>\n\n' +
+      '<template id="shell">' + tplEl.innerHTML + '</template>\n\n' +
+      '<script type="application/json" id="site-data">' + json + CLOSE_SCRIPT + '\n' +
+      '<script id="app">' + $('app').textContent + CLOSE_SCRIPT + '\n';
+    return '<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>' +
+      resetCss() + '</style></head><body>' + content + '</body></html>';
+  }
+
+  $('save').addEventListener('click', function () {
+    if (saving || !editing) return;
+    normalize(draft);
+    saving = true; $('save').disabled = true;
+    say(bi('সংরক্ষণ হচ্ছে...', 'Saving...'));
+    var doc = buildDoc(draft);
+    (C ? C.use('artifact') : Promise.resolve(null)).then(function (a) {
+      if (!a) { var e = new Error('none'); e.code = 'none'; throw e; }
+      return a.publish(doc);
+    }).then(function () {
+      state = draft; say(bi('সংরক্ষণ হয়েছে। পেজ নতুন করে লোড হচ্ছে...', 'Saved. Reloading the page...'));
+    }).catch(function (err) {
+      saving = false; $('save').disabled = false;
+      var code = err && err.code;
+      if (code === 'conflict') say(bi('এর মধ্যে অন্য কেউ পেজ বদলেছে। পেজ নতুন করে লোড হচ্ছে, তারপর আবার চেষ্টা করুন।', 'Someone else changed the page. It is reloading, then try again.'));
+      else if (code === 'not_writer' || code === 'not_granted' || code === 'none') say(bi('এই পেজ সংরক্ষণের অনুমতি নেই। আপনার নিজের অ্যাকাউন্টে খুলে চেষ্টা করুন।', 'You are not allowed to save this page. Open it in your own account and try again.'));
+      else if (code === 'too_large') say(bi('ছবি বা তথ্য অনেক বড়। কিছু ছবি সরিয়ে আবার চেষ্টা করুন।', 'The page is too large. Remove a few photos and try again.'));
+      else say(bi('সংরক্ষণ হয়নি। আবার চেষ্টা করুন।', 'Could not save. Please try again.') + (code ? ' (' + esc(code) + ')' : ''));
+    });
+  });
+})();
+</script>
+
+</body></html>
